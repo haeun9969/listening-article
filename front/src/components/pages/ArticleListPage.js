@@ -10,6 +10,7 @@ import Entertain from './Tabs/Entertain'
 import Politics from './Tabs/Politics'
 import It from './Tabs/IT'
 
+
 const Tab = styled.div`
   width: 100%;
   display: flex;
@@ -31,6 +32,7 @@ const Tab = styled.div`
 `
 
 const ArticleListPage = ({article}) => {
+  
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
 
@@ -58,6 +60,8 @@ const ArticleListPage = ({article}) => {
     setActiveTab(id);
     console.log(activeTab);
   }
+
+
 
   return (
     <div>

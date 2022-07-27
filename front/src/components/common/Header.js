@@ -31,15 +31,23 @@ const Spacer = styled.div`
   height: 4rem;
 `;
 
+const Logo = styled.div`
+	display: flex;
+	align-items: center;
+  justify-content: center;
+`;
+
 const Header = () => {
   return (
     <div>
       <HeaderBlock>
         <Wrapper>
           <Link to="/">
-            <div className='logo'>
-              <img className='logoImg' src={logo} alt='logo' />
-            </div>
+            <Logo>
+              <div className='logo'>
+                <img className='logoImg' src={logo} alt='logo' />
+              </div>
+            </Logo>
           </Link>
           {/* <div className='right'>
             <button>로그인 없음</button>

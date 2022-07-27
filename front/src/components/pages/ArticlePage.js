@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import Header from '../common/Header';
 import styled from 'styled-components';
 import { useStore } from '../common/store';
+import speaker from '../../img/sound-on.png';
+import arrowL from '../../img/left-arrow.png';
+import arrowR from '../../img/right-arrow.png';
 
 const ArticleArea = styled.div`
 	background-color: whitesmoke;
@@ -85,7 +88,9 @@ const ArticlePage = () => {
 				<TitleArea>
 				    <h7>{findArticle.publisher}</h7>
 					<h1>{findArticle.title}</h1>
-					<button>플레이</button>
+					<div className='speaker'>
+						<img className='speakerImg' src={speaker} alt='speaker' />
+					</div>
 				</TitleArea>
 				<ContentArea>
 					<img src={findArticle.img} alt='articleImg' />
@@ -93,13 +98,17 @@ const ArticlePage = () => {
 				</ContentArea>
 				<p>{findArticle.reporter}</p>
 				<button>
-				<a href={findArticle.url} target="_blank" rel="noreferrer">기사 본문 링크</a>
+				<a href={findArticle.url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>기사 본문 링크</a>
 				</button>
 				
 			</ArticleArea>
 			<ArticleButtons>
-				<button>이전 기사</button>
-				<button>다음 기사</button>
+				    <div className='arrowL'>
+						<img className='arrowLImg' src={arrowL} alt='arrowL' />
+					</div>
+					<div className='arrowR'>
+						<img className='arrowRImg' src={arrowR} alt='arrowR' />
+					</div>
 			</ArticleButtons>
 		</div>
 	);
