@@ -1,5 +1,5 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Header from '../common/Header';
 import styled from 'styled-components';
 import { useStore } from '../common/store';
@@ -41,42 +41,147 @@ const ArticlePage = () => {
 	const {type, id} = useParams();
 	const {articles} = useStore();
 	const {economy, culture, society, sports, entertain, politic, IT} = articles;
-	let findArticle
+	let findArticle;
+	let nextArticle;
+	let prevArticle;
+	let length;
+	let num;
+	let isLast = false;
+	let isFirst = false;
+
 	switch (type) {
 		case '0':
-			findArticle = economy.find((article) => {
+			length = economy.length;
+			findArticle = economy.find((article, index) => {
+				num = index;
 				return article._id === id
 			});
+			if (num !== length - 1) {
+				nextArticle = economy.at(num+1)._id;
+			}
+			else {
+				isLast = true;
+			}
+			if (num !== 0) {
+				prevArticle = economy.at(num-1)._id;
+			}
+			else {
+				isFirst = true;
+			}
 			break;
 		case '1':
-			findArticle = culture.find((article) => {
+			length = culture.length;
+			findArticle = culture.find((article, index) => {
+				num = index;
 				return article._id === id
-			});
+			}); 
+			if (num !== length - 1) {
+				nextArticle = culture.at(num+1)._id;
+			}
+			else {
+				isLast = true;
+			}
+			if (num !== 0) {
+				prevArticle = culture.at(num-1)._id;
+			}
+			else {
+				isFirst = true;
+			}
 			break;
 		case '2':
-			findArticle = society.find((article) => {
+			length = society.length;
+			findArticle = society.find((article, index) => {
+				num = index;
 				return article._id === id
 			});
+			if (num !== length - 1) {
+				nextArticle = society.at(num+1)._id;
+			}
+			else {
+				isLast = true;
+			}
+			if (num !== 0) {
+				prevArticle = society.at(num-1)._id;
+			}
+			else {
+				isFirst = true;
+			}
 			break;
 		case '3':
-			findArticle = sports.find((article) => {
+			length = sports.length;
+			findArticle = sports.find((article, index) => {
+				num = index;
 				return article._id === id
 			});
+			if (num !== length - 1) {
+				nextArticle = sports.at(num+1)._id;
+			}
+			else {
+				isLast = true;
+			}
+			if (num !== 0) {
+				prevArticle = sports.at(num-1)._id;
+			}
+			else {
+				isFirst = true;
+			}
 			break;
 		case '4':
-			findArticle = entertain.find((article) => {
+			length = entertain.length;
+			findArticle = entertain.find((article, index) => {
+				num = index;
 				return article._id === id
 			});
+			if (num !== length - 1) {
+				nextArticle = entertain.at(num+1)._id;
+			}
+			else {
+				isLast = true;
+			}
+			if (num !== 0) {
+				prevArticle = entertain.at(num-1)._id;
+			}
+			else {
+				isFirst = true;
+			}
 			break;
 		case '5':
-			findArticle = politic.find((article) => {
+			length = politic.length;
+			findArticle = politic.find((article, index) => {
+				num = index;
 				return article._id === id
 			});
+			if (num !== length - 1) {
+				nextArticle = politic.at(num+1)._id;
+			}
+			else {
+				isLast = true;
+			}
+			if (num !== 0) {
+				prevArticle = politic.at(num-1)._id;
+			}
+			else {
+				isFirst = true;
+			}
 			break;
 		case '6':
-			findArticle = IT.find((article) => {
+			length = IT.length;
+			findArticle = IT.find((article, index) => {
+				num = index;
 				return article._id === id
 			});
+			if (num !== length - 1) {
+				nextArticle = IT.at(num+1)._id;
+			}
+			else {
+				isLast = true;
+			}
+			if (num !== 0) {
+				prevArticle = IT.at(num-1)._id;
+			}
+			else {
+				isFirst = true;
+			}
 			break;
 		default:
 	}
@@ -86,7 +191,7 @@ const ArticlePage = () => {
 			<Header />
 			<ArticleArea>
 				<TitleArea>
-				    <h7>{findArticle.publisher}</h7>
+				  <h7>{findArticle.publisher}</h7>
 					<h1>{findArticle.title}</h1>
 					<div className='speaker'>
 						<img className='speakerImg' src={speaker} alt='speaker' />
@@ -98,20 +203,25 @@ const ArticlePage = () => {
 				</ContentArea>
 				<p>{findArticle.reporter}</p>
 				<button>
-				<a href={findArticle.url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>기사 본문 링크</a>
+					<a href={findArticle.url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>기사 본문 링크</a>
 				</button>
 				
 			</ArticleArea>
 			<ArticleButtons>
-				    <div className='arrowL'>
+				{ isFirst === false && 
+					<Link to={`/article/${type}/${prevArticle}`} className='arrowL'>
 						<img className='arrowLImg' src={arrowL} alt='arrowL' />
-					</div>
-					<div className='arrowR'>
+					</Link>
+				}
+				{ isLast === false && 
+					<Link to={`/article/${type}/${nextArticle}`} className='arrowR'>
 						<img className='arrowRImg' src={arrowR} alt='arrowR' />
-					</div>
+					</Link>
+				}
 			</ArticleButtons>
 		</div>
 	);
 };
+
 
 export default ArticlePage;

@@ -61,8 +61,6 @@ const ArticleListPage = ({article}) => {
     console.log(activeTab);
   }
 
-
-
   return (
     <div>
       <Header />
