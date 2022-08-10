@@ -15,15 +15,13 @@ const Wrapper = styled(Responsive)`
   height: 4rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   .logo {
     font-size: 1.125rem;
     font-weight: 800;
     letter-spacing: 2px;
-  }
-  .right {
-    display: flex;
-    align-items: center;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
   }
 `;
 

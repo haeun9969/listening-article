@@ -9,14 +9,14 @@ import Sports from './Tabs/Sports'
 import Entertain from './Tabs/Entertain'
 import Politics from './Tabs/Politics'
 import It from './Tabs/IT'
-
+import search from '../../img/search.png'
 
 const Tab = styled.div`
   width: 100%;
   display: flex;
   border: 1px;
   li {
-    width: 80px;
+    width: 16%;
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
@@ -27,8 +27,20 @@ const Tab = styled.div`
   }
   li:active {
     background-color: gray;
-    height: 100%;
   }
+`
+
+const SearchArea = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const Input = styled.input`
+  width: 40%;
+  height: 30px;
+  margin: 15px;
+  border-radius: 10px;
+  font-size: 12pt;
 `
 
 const ArticleListPage = ({article}) => {
@@ -64,13 +76,15 @@ const ArticleListPage = ({article}) => {
   return (
     <div>
       <Header />
-      <input 
-        type="text"
-        placeholder="검색"
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-      />
+      <SearchArea>
+        <Input 
+          type="text"
+          placeholder="검색"
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
+      </SearchArea>
       <Tab>
         <li onClick={() => clickTab(0)}>경제</li>
         <li onClick={() => clickTab(1)}>문화</li>
