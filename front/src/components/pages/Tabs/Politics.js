@@ -45,12 +45,11 @@ const Title = styled.h2`
   margin-left: 10px;
 `
 
-const Politics = (articles) => {
-  const { article } = articles
-  console.log(article);
+function Politics (props) {
+  var arr = props.articles.filter(val => (val.title.includes(props.search)));
   return (
     <ArticleListArea>
-      {article.map(a => (
+      {arr.map(a => (
         <Article article={a} key={a._id} type='5'></Article>
       ))}
     </ArticleListArea>
