@@ -6,6 +6,7 @@ import { useStore } from '../common/store';
 import speaker from '../../img/sound-on.png';
 import arrowL from '../../img/left-arrow.png';
 import arrowR from '../../img/right-arrow.png';
+import test from '../../audio/test.wav'
 
 const ArticleArea = styled.div`
 	background-color: whitesmoke;
@@ -185,6 +186,9 @@ const ArticlePage = () => {
 			break;
 		default:
 	}
+	let audio = new Audio('http://haeun9969.dothome.co.kr/capstone/정치/1.wav')
+  const start = () => {audio.play()}
+	const stop = () => {audio.pause()}
 
 	return (
 		<div>
@@ -193,9 +197,12 @@ const ArticlePage = () => {
 				<TitleArea>
 				  <h7>{findArticle.publisher}</h7>
 					<h1>{findArticle.title}</h1>
-					<div className='speaker'>
+					<div className='speaker' onClick={start}>
 						<img className='speakerImg' src={speaker} alt='speaker' />
 					</div>
+					<button onClick={stop}>
+						stop
+					</button>
 				</TitleArea>
 				<ContentArea>
 					<img src={findArticle.img} alt='articleImg' />

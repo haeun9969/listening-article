@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../../style/palette';
 import speaker from '../../../img/sound.png';
-
+import test from '../../../audio/test.wav'
 
 const ArticleListArea = styled.div`
   margin: 2%;
@@ -11,7 +11,7 @@ const ArticleListArea = styled.div`
   flex-wrap: wrap;
 `
 
-const ArticleLink = styled(Link)`
+const ArticleArea = styled.div`
   font-size: 14px;
   color: #353535;
   list-style: none;
@@ -38,6 +38,10 @@ const ArticleLink = styled(Link)`
 	justify-content: space-between;
 `
 
+const ArticleLink =styled(Link)`
+  display: flex;
+`
+
 const Thumbnail = styled.img`
   width: 93px;
   /* width: auto; */
@@ -62,14 +66,19 @@ function Economy (props) {
 };
 
 function Article(props) {
+  let audio = new Audio(test)
+  const start = () => {audio.play()}
   return(
-    <ArticleLink to={`/article/${props.type}/${props.article._id}`} style={{ textDecoration: 'none' }}>
-      <Thumbnail src={props.article.img} alt='img' />
-      <Title>{props.article.title}</Title>
-      <div className='speaker'>
+    <ArticleArea>
+      <ArticleLink to={`/article/${props.type}/${props.article._id}`} style={{ textDecoration: 'none' }}>
+        <Thumbnail src={props.article.img} alt='img' />
+        <Title>{props.article.title}</Title>
+      </ArticleLink>
+      <div className='speaker' onClick={start}>
         <img className='speakerImg' src={speaker} alt='speaker' />
       </div>
-    </ArticleLink>
+    </ArticleArea>
+
     )
 }
 
