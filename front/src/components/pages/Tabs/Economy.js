@@ -1,15 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import palette from '../../../style/palette';
-import speaker from '../../../img/sound.png';
-import test from '../../../audio/test.wav'
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import palette from "../../../style/palette";
+import speaker from "../../../img/sound.png";
+import pauseIcon from "../../../img/pause-sm.png";
 
 const ArticleListArea = styled.div`
   margin: 2%;
   display: flex;
   flex-wrap: wrap;
-`
+`;
 
 const ArticleArea = styled.div`
   font-size: 14px;
@@ -35,51 +35,68 @@ const ArticleArea = styled.div`
   }
   height: 80px;
   display: flex;
-	justify-content: space-between;
-`
+  justify-content: space-between;
+`;
 
-const ArticleLink =styled(Link)`
+const ArticleLink = styled(Link)`
   display: flex;
-`
+`;
 
 const Thumbnail = styled.img`
   width: 93px;
   /* width: auto; */
   height: 100%;
   object-fit: contain;
-`
+`;
 
 const Title = styled.h2`
   margin-block: 2px;
   margin-left: 10px;
-`
+`;
 
-function Economy (props) {
-  var arr = props.articles.filter(val => (val.title.includes(props.search)));
+function Economy(props) {
+  var arr = props.articles.filter((val) => val.title.includes(props.search));
   return (
     <ArticleListArea>
-      {arr.map(a => (
-        <Article article={a} key={a._id} type='0'></Article>
+      {arr.map((a) => (
+        <Article article={a} key={a._id} type="0"></Article>
       ))}
     </ArticleListArea>
   );
-};
+}
 
 function Article(props) {
-  let audio = new Audio(test)
-  const start = () => {audio.play()}
-  return(
+  const [playing, setPlaying] = useState(false);
+
+  let audio = new Audio("http://haeun9969.dothome.co.kr/capstone/정치/1.wav");
+
+  useEffect(() => {
+    playing ? audio.play() : audio.pause();
+    return () => audio.pause();
+  }, [playing]);
+
+  function togglePlay() {
+    setPlaying((s) => !s);
+  }
+
+  return (
     <ArticleArea>
-      <ArticleLink to={`/article/${props.type}/${props.article._id}`} style={{ textDecoration: 'none' }}>
-        <Thumbnail src={props.article.img} alt='img' />
+      <ArticleLink
+        to={`/article/${props.type}/${props.article._id}`}
+        style={{ textDecoration: "none" }}
+      >
+        <Thumbnail src={props.article.img} alt="img" />
         <Title>{props.article.title}</Title>
       </ArticleLink>
-      <div className='speaker' onClick={start}>
-        <img className='speakerImg' src={speaker} alt='speaker' />
+      <div className="speaker" onClick={togglePlay}>
+        {playing ? (
+          <img className="pauseImg" src={pauseIcon} alt="pause" />
+        ) : (
+          <img className="speakerImg" src={speaker} alt="speaker" />
+        )}{" "}
       </div>
     </ArticleArea>
-
-    )
+  );
 }
 
 export default Economy;
