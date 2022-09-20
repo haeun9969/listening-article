@@ -173,7 +173,7 @@ const ArticlePage = () => {
       break;
     default:
   }
-  let audio = new Audio("http://haeun9969.dothome.co.kr/capstone/정치/1.wav");
+  let audio = new Audio(`http://haeun9969.dothome.co.kr/capstone/IT/${id}.wav`);
 
   const [playing, setPlaying] = useState(false);
 

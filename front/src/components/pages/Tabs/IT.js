@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../../style/palette';
 import speaker from '../../../img/sound.png';
+import pauseIcon from "../../../img/pause-sm.png";
 
 const ArticleListArea = styled.div`
   margin: 2%;
@@ -10,7 +11,7 @@ const ArticleListArea = styled.div`
   flex-wrap: wrap;
 `
 
-const ArticleLink = styled(Link)`
+const ArticleArea = styled.div`
   font-size: 14px;
   color: #353535;
   list-style: none;
@@ -34,8 +35,12 @@ const ArticleLink = styled(Link)`
   }
   height: 80px;
   display: flex;
-	justify-content: space-between;
-`
+  justify-content: space-between;
+`;
+
+const ArticleLink = styled(Link)`
+  display: flex;
+`;
 
 const Thumbnail = styled.img`
   width: 93px;
@@ -61,14 +66,36 @@ function IT (props) {
 };
 
 function Article(props) {
+  const [playing, setPlaying] = useState(false);
+
+  let audio = new Audio(`http://haeun9969.dothome.co.kr/capstone/IT/${props.article._id}.wav`);
+
+  useEffect(() => {
+    playing ? audio.play() : audio.pause();
+    return () => audio.pause();
+  }, [playing]);
+
+  function togglePlay() {
+    setPlaying((s) => !s);
+  }
+
   return(
-    <ArticleLink to={`/article/${props.type}/${props.article._id}`} style={{ textDecoration: 'none' }}>
-      <Thumbnail src={props.article.img} alt='img' />
-      <Title>{props.article.title}</Title>
-      <div className='speaker'>
-        <img className='speakerImg' src={speaker} alt='speaker' />
+    <ArticleArea>
+      <ArticleLink
+        to={`/article/${props.type}/${props.article._id}`}
+        style={{ textDecoration: "none" }}
+      >
+        <Thumbnail src={props.article.img} alt="img" />
+        <Title>{props.article.title}</Title>
+      </ArticleLink>
+      <div className="speaker" onClick={togglePlay}>
+        {playing ? (
+          <img className="pauseImg" src={pauseIcon} alt="pause" />
+        ) : (
+          <img className="speakerImg" src={speaker} alt="speaker" />
+        )}{" "}
       </div>
-    </ArticleLink>
+    </ArticleArea>
     )
 }
 
