@@ -181,11 +181,6 @@ const ArticlePage = () => {
         <TitleArea>
           <h7>{findArticle.publisher}</h7>
           <h1>{findArticle.title}</h1>
-            {playing ? (
-              <img className="pauseImg" src={pauseIcon} alt="pause" />
-            ) : (
-              <img className="speakerImg" src={speaker} alt="speaker" />
-            )}
           </div>
         </TitleArea>
         <ContentArea>
