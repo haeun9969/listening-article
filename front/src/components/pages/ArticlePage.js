@@ -181,7 +181,6 @@ const ArticlePage = () => {
         <TitleArea>
           <h7>{findArticle.publisher}</h7>
           <h1>{findArticle.title}</h1>
-          </div>
         </TitleArea>
         <ContentArea>
           <img src={findArticle.img} alt="articleImg" />
