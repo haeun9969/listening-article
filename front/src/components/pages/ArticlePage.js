@@ -181,7 +181,6 @@ const ArticlePage = () => {
         <TitleArea>
           <h7>{findArticle.publisher}</h7>
           <h1>{findArticle.title}</h1>
-          <div className="speaker" onClick={togglePlay}>
             {playing ? (
               <img className="pauseImg" src={pauseIcon} alt="pause" />
             ) : (
