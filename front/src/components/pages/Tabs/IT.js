@@ -66,7 +66,19 @@ function IT (props) {
 };
 
 function Article(props) {
- 
+  const [playing, setPlaying] = useState(false);
+
+  let audio = new Audio(`http://haeun9969.dothome.co.kr/capstone/IT/${props.article._id}.wav`);
+
+  useEffect(() => {
+    playing ? audio.play() : audio.pause();
+    return () => audio.pause();
+  }, [playing]);
+
+  function togglePlay() {
+    setPlaying((s) => !s);
+  }
+
   return(
     <ArticleArea>
       <ArticleLink
@@ -76,6 +88,13 @@ function Article(props) {
         <Thumbnail src={props.article.img} alt="img" />
         <Title>{props.article.title}</Title>
       </ArticleLink>
+      <div className="speaker" onClick={togglePlay}>
+        {playing ? (
+          <img className="pauseImg" src={pauseIcon} alt="pause" />
+        ) : (
+          <img className="speakerImg" src={speaker} alt="speaker" />
+        )}{" "}
+      </div>
     </ArticleArea>
     )
 }
